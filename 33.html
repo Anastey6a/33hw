@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Генерація списку</title>
+</head>
+<body>
+    <div id="list-container"></div>
+
+    <script>
+        function generateList(array) {
+            const ul = document.createElement('ul');
+
+            array.forEach(item => {
+                const li = document.createElement('li');
+
+                if (Array.isArray(item)) {
+                    li.appendChild(generateList(item));
+                } else {
+                    li.textContent = item;
+                }
+
+                ul.appendChild(li);
+            });
+
+            return ul;
+        }
+
+       
+        const simpleArray = [1, 2, 3];
+        const nestedArray = [1, 2, [1.1, 1.2, 1.3], 3];
+
+        const container = document.getElementById('list-container');
+        container.appendChild(generateList(simpleArray));
+        container.appendChild(generateList(nestedArray));
+    </script>
+</body>
+</html>
